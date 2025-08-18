@@ -11,15 +11,31 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("S E T T I N G S", style: TextStyle(color: Colors.white)),
+          child: Text(
+            "S E T T I N G S",
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.all(25),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Dark Mode"),
+            Text(
+              "Dark Mode",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
             CupertinoSwitch(
               value: Provider.of<ThemeProvider>(
                 context,

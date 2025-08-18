@@ -15,7 +15,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Center(
-          child: Text("P L A Y L I S T", style: TextStyle(color: Colors.white)),
+          child: Text(
+            "P L A Y L I S T",
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
