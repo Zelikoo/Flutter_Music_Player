@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(12),
         ),
         padding: const EdgeInsets.all(16),
