@@ -5,13 +5,13 @@ class PlaylistProvider extends ChangeNotifier {
   //Playlist of songs
   final List<Song> _playlist = [
     Song(
-      songName: "Celeste - 08 Scattered and Lost",
+      songName: "Scattered and Lost",
       artistName: "Lena Raine",
       albumArtImagePath: "assets/images/celeste.jpeg",
       audioPath: "assets/audio/celeste8.mp3",
     ),
     Song(
-      songName: "TUNIC - 02 Memories of Memories",
+      songName: "Memories of Memories",
       artistName: "Liifeformed",
       albumArtImagePath: "assets/images/tunic.jpg",
       audioPath: "assets/audio/tunic2.mp3",
