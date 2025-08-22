@@ -55,8 +55,18 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
               final Song song = playlist[index];
               return ListTile(
-                title: Text(song.songName),
-                subtitle: Text(song.artistName),
+                title: Text(
+                  song.songName,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
+                subtitle: Text(
+                  song.artistName,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
                 leading: Image.asset(song.albumArtImagePath),
                 onTap: () => goToSong(index),
               );

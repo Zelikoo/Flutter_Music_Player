@@ -6,6 +6,16 @@ import 'package:flutter_music_player/models/playlist_provider.dart';
 class SongPage extends StatelessWidget {
   const SongPage({super.key});
 
+  String formatTime(Duration duration) {
+    String twoDigitalSeconds = duration.inSeconds
+        .remainder(60)
+        .toString()
+        .padLeft(2, '0');
+    String formattedTime = "${duration.inMinutes}:$twoDigitalSeconds";
+
+    return formattedTime;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<PlaylistProvider>(
@@ -31,10 +41,24 @@ class SongPage extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon: Icon(Icons.arrow_back),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
-                      Text("P L A Y L I S T"),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+                      Text(
+                        "P L A Y L I S T",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.menu,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 25),
@@ -62,9 +86,19 @@ class SongPage extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.inversePrimary,
                                   ),
                                 ),
-                                Text(currentSong.artistName),
+                                Text(
+                                  currentSong.artistName,
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.inversePrimary,
+                                  ),
+                                ),
                               ],
                             ),
                             Icon(Icons.favorite, color: Colors.red),
@@ -80,18 +114,42 @@ class SongPage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //Start time and end time
-                            Text("0:00"),
+                            Text(
+                              formatTime(value.currentDuration),
+                              style: TextStyle(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.inversePrimary,
+                              ),
+                            ),
                             //shuffle
-                            Icon(Icons.shuffle),
+                            Icon(
+                              Icons.shuffle,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.inversePrimary,
+                            ),
                             //repeat
-                            Icon(Icons.repeat),
+                            Icon(
+                              Icons.repeat,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.inversePrimary,
+                            ),
 
                             //end time
-                            Text("10:00"),
+                            Text(
+                              formatTime(value.totalDuration),
+                              style: TextStyle(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.inversePrimary,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -103,10 +161,13 @@ class SongPage extends StatelessWidget {
                         ),
                         child: Slider(
                           min: 0,
-                          max: 100,
-                          value: 50,
+                          max: value.totalDuration.inSeconds.toDouble(),
+                          value: value.currentDuration.inSeconds.toDouble(),
                           activeColor: Colors.green,
-                          onChanged: (value) {},
+                          onChanged: (double) {},
+                          onChangeEnd: (double) {
+                            value.seek(Duration(seconds: double.toInt()));
+                          },
                         ),
                       ),
                     ],
@@ -119,8 +180,15 @@ class SongPage extends StatelessWidget {
                       //skip
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {},
-                          child: NeuBox(child: Icon(Icons.skip_previous)),
+                          onTap: value.playPreviousSong,
+                          child: NeuBox(
+                            child: Icon(
+                              Icons.skip_previous,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.inversePrimary,
+                            ),
+                          ),
                         ),
                       ),
 
@@ -129,8 +197,15 @@ class SongPage extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: GestureDetector(
-                          onTap: () {},
-                          child: NeuBox(child: Icon(Icons.play_arrow)),
+                          onTap: value.pauseOrResume,
+                          child: NeuBox(
+                            child: Icon(
+                              value.isPlaying ? Icons.pause : Icons.play_arrow,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.inversePrimary,
+                            ),
+                          ),
                         ),
                       ),
 
@@ -138,8 +213,15 @@ class SongPage extends StatelessWidget {
                       //skip forward
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {},
-                          child: NeuBox(child: Icon(Icons.skip_next)),
+                          onTap: value.playNextSong,
+                          child: NeuBox(
+                            child: Icon(
+                              Icons.skip_next,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.inversePrimary,
+                            ),
+                          ),
                         ),
                       ),
                     ],
