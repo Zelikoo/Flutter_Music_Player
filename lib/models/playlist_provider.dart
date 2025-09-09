@@ -17,6 +17,12 @@ class PlaylistProvider extends ChangeNotifier {
       albumArtImagePath: "assets/images/tunic.jpg",
       audioPath: "audio/tunic2.mp3",
     ),
+    Song(
+      songName: "Choral Chambers",
+      artistName: "Christopher Larkin",
+      albumArtImagePath: "assets/images/silksong.jpg",
+      audioPath: "audio/Hollow Knight Silksong - OST - Choral Chambers.mp3",
+    ),
   ];
 
   int? _currentSongIndex;
